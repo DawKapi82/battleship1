@@ -1,31 +1,53 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battleships
+## Battleships computer game
 
-Welcome USER_NAME,
+Battleship is a computer game written in python in console interface.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## How to play
 
-## Reminders
+Player after inserted his name can start the game against the computer. The goal is to guess oponents ships positions. 
+Game is going in rounds. The rules are listed [here](https://en.wikipedia.org/wiki/Battleship_(game)): 
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## Features
 
-## Creating the Heroku app
+- Board generation. Random for player and computer.
+- Playing against computer
+- Validating user input
+- Displays current scores
+- Maintaining history of moves
+- Displaying winner of the game
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Future Features
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+- Allow player to select board size and number of ships
+- Allow player to position ships themselves
+- Have ships larger than 1x1
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Data model
 
-Connect your GitHub repository and deploy as normal.
+The ships and board fields are in twodimensional list of numbers and empty field is represented by 0 and ship is
+represented by 1. In console field is represented by '.' char and ship is represented by '@' char.
 
-## Constraints
+## Functions 
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+- generate_arr - generate array with 4 ships in random places
+- display_arr - print the board on the screen function
+- hit - hit opponents board function
+- check if board contains only zeros function
+- check_coords - check if coordinates are valid and they are not in history already function
 
------
-Happy coding!
+
+## Bugs
+
+- History of moves was not stored correct, we changed the way to store every single move to store it in list in a numbers tuple with number of row and number of columns 
+- after players guess there was an error if the coordinates were outside the board. We fixed it with validation function and while loop allowing the player to enter coordinates once again.
+
+## Remaining Bugs 
+- No Bugs remaining
+
+
+
+
+
+
