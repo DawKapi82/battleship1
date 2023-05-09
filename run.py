@@ -53,58 +53,58 @@ def hit(arr, ri, ci):
 
 def empty(arr):
     return sum([sum(row) for row in arr]) == 0
-    """check if coordinates are valid and they
+
+
+"""check if coordinates are valid and they
 are not in history already function"""
 
 
 def check_coords(ri, ci):
     if ri < 0 or ri > 4 or ci < 0 or ci > 4:
-        print("insert values in range from 0 to 4")
+        print("Insert values in the range from 0 to 4")
         return False
 
     if len(history) > 0 and (ri, ci) in history:
-        print("this coordinates were already hit")
+        print("These coordinates were already hit")
         return False
 
     return True
 
 
 """players points vars"""
-
-
 player_points = 0
 computer_points = 0
 
 print("Please enter your name:")
 name = input()
 
-"""generate and display players board"""
+"""generate and display player's board"""
 player_arr = generate_arr()
 print(name + "'s board:")
 display_arr(player_arr, False)
 
-"""generate and display computer board"""
+"""generate and display computer's board"""
 computer_arr = generate_arr()
-print("Computers board:")
+print("Computer's board:")
 display_arr(computer_arr, True)
 
 """variable determining the main loop of the game"""
 game = True
 
-"""if game is True repeat rounds"""
+"""if game is True, repeat rounds"""
 while game:
     ri = -1
     ci = -1
 
-    """player inserting coordinates till they are valid"""
+    """player inserts coordinates until they are valid"""
     while not check_coords(ri, ci):
         print("Guess a row:")
         ri = int(input())
         print("Guess a column:")
         ci = int(input())
 
-    """players hit"""
-    print("Player guessed:(", ri, ",", ci, ")")
+    """player's hit"""
+    print("Player guessed: (", ri, ",", ci, ")")
     points = hit(computer_arr, ri, ci)
     """add coordinates to history"""
     history.append((ri, ci))
@@ -118,17 +118,21 @@ while game:
     """add points"""
     player_points += points
 
-    """random computers move"""
+    """random computer's move"""
     ri = randint(0, 4)
     ci = randint(0, 4)
-    print("Computer guessed:(", ri, ", ", ci, ")")
+    while not check_coords(ri, ci):
+        ri = randint(0, 4)
+        ci = randint(0, 4)
+    print("Computer guessed: (", ri, ",", ci, ")")
 
-    """computers hit"""
+    """computer's hit"""
     points = hit(player_arr, ri, ci)
 
     """display result of hit"""
     if points == 1:
         print("Computer hit the ship")
+
     else:
         print("Computer missed")
 
@@ -137,9 +141,10 @@ while game:
 
     """display summary of the round"""
     print("---------------------------------")
-    print("After this round, the scores are")
-    print(name, ":", player_points, ". Computer", computer_points)
-    """player decide to play or stop the game"""
+    print("After this round, the scores are:")
+    print(name, ":", player_points, "points. Computer:", computer_points,
+          "points")
+    """player decides to play or stop the game"""
     print("Press any key to continue or 'no' to quit")
     command = input()
     if command == "no":
@@ -151,5 +156,5 @@ while game:
         print("Computer won the game!")
         game = False
     elif empty(computer_arr):
-        print("Player won the game!")
+        print("Player", name, "won the game!")
         game = False
