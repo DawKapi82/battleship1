@@ -26,14 +26,25 @@ def generate_arr():
 """print the board on the screen function"""
 
 
-def display_arr(arr, hide):
-    for r in arr:
+def display_arr(player_arr, computer_arr):
+    print("Player's board:")
+    for r in player_arr:
         rs = ""
         for el in r:
-            if hide or el == 0:
+            if el == 0:
                 rs += ". "
             else:
                 rs += "@ "
+        print(rs)
+
+    print("Computer's board:")
+    for r in computer_arr:
+        rs = ""
+        for el in r:
+            if el == 0:
+                rs += ". "
+            else:
+                rs += "X "
         print(rs)
 
 
@@ -64,7 +75,7 @@ def check_coords(ri, ci):
         print("Insert values in the range from 0 to 4")
         return False
 
-    if len(history) > 0 and (ri, ci) in history:
+    if (ri, ci) in history:
         print("These coordinates were already hit")
         return False
 
@@ -84,19 +95,17 @@ while name.strip() == "":
 
 """generate and display player's board"""
 player_arr = generate_arr()
-print(name + "'s board:")
-display_arr(player_arr, False)
 
 """generate and display computer's board"""
 computer_arr = generate_arr()
-print("Computer's board:")
-display_arr(computer_arr, True)
 
 """variable determining the main loop of the game"""
 game = True
 
 """if game is True, repeat rounds"""
 while game:
+    display_arr(player_arr, computer_arr)
+
     ri = -1
     ci = -1
 
@@ -132,11 +141,13 @@ while game:
     player_points += points
 
     """random computer's move"""
-    ri = randint(0, 4)
-    ci = randint(0, 4)
+    ri = -1
+    ci = -1
+
     while not check_coords(ri, ci):
         ri = randint(0, 4)
         ci = randint(0, 4)
+
     print("Computer guessed: (", ri, ",", ci, ")")
 
     """computer's hit"""
@@ -156,6 +167,7 @@ while game:
     print("After this round, the scores are:")
     print(name, ":", player_points, "points. Computer:", computer_points,
           "points")
+    print("---------------------------------")
 
     """check if someone won the game and end the game"""
     if empty(player_arr):
@@ -170,5 +182,3 @@ while game:
     command = input().lower()
     if command == "no":
         game = False
-    print("---------------------------------")
-    
