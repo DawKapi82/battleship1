@@ -78,6 +78,10 @@ computer_points = 0
 print("Please enter your name:")
 name = input()
 
+while name.strip() == "":
+    print("Name cannot be empty. Please enter your name:")
+    name = input()
+
 """generate and display player's board"""
 player_arr = generate_arr()
 print(name + "'s board:")
@@ -98,10 +102,19 @@ while game:
 
     """player inserts coordinates until they are valid"""
     while not check_coords(ri, ci):
-        print("Guess a row:")
-        ri = int(input())
-        print("Guess a column:")
-        ci = int(input())
+        print("Guess a row (0-4):")
+        try:
+            ri = int(input())
+        except ValueError:
+            print("Invalid input. Please enter an integer value.")
+            continue
+
+        print("Guess a column (0-4):")
+        try:
+            ci = int(input())
+        except ValueError:
+            print("Invalid input. Please enter an integer value.")
+            continue
 
     """player's hit"""
     print("Player guessed: (", ri, ",", ci, ")")
@@ -132,7 +145,6 @@ while game:
     """display result of hit"""
     if points == 1:
         print("Computer hit the ship")
-
     else:
         print("Computer missed")
 
@@ -144,12 +156,6 @@ while game:
     print("After this round, the scores are:")
     print(name, ":", player_points, "points. Computer:", computer_points,
           "points")
-    """player decides to play or stop the game"""
-    print("Press any key to continue or 'no' to quit")
-    command = input()
-    if command == "no":
-        game = False
-    print("---------------------------------")
 
     """check if someone won the game and end the game"""
     if empty(player_arr):
@@ -158,3 +164,11 @@ while game:
     elif empty(computer_arr):
         print("Player", name, "won the game!")
         game = False
+
+    """player decides to play or stop the game"""
+    print("Press any key to continue or 'no' to quit")
+    command = input().lower()
+    if command == "no":
+        game = False
+    print("---------------------------------")
+    
