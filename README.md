@@ -2,7 +2,7 @@ Battleship Game
 
 The Battleship Game is a Python application that allows users to play the classic
 game of Battleship against the computer. It also provides an online version of the
-game accessible at https://battelship.herokuapp.com/.
+game accessible at https://battleship-dawid.herokuapp.com/.
 
 Purpose
 
@@ -30,7 +30,7 @@ How to Play
 
 To play the Battleship Game:
 
-1. Visit https://battelship.herokuapp.com/ in your web browser.
+1. Visit https://battleship-dawid.herokuapp.com/ in your web browser.
 2. Follow the on-screen instructions to start the game.
 3. Guess the row and column coordinates to target your opponent's ships.
 4. The game will display the result of your hit, whether it's a hit or a miss.
